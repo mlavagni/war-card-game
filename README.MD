@@ -45,7 +45,7 @@ Rules for two-player game:
  ![Play](/assets/wireframes/Play.png)
 
   - Make your move
- ![Make your move](/assets/wireframes/Play.png)
+ ![Make your move](/assets/wireframes/Make-Your-Move.png)
 
  - War
  ![War](/assets/wireframes/Play-War.png)
