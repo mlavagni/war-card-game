@@ -43,5 +43,8 @@ Rules for two-player game:
 
 
 # Tech
+ - I am using html to display the game 
+ - I am using CSS to style the game
+ - I am using JavaScript to manage the logic of the game 
 
 
