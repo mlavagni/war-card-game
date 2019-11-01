@@ -1,11 +1,14 @@
 body{
-    background: url(../images/war-2930360_1920.jpg);
+    background: url(../assets/backgrounds/background1.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 h1 {
-    text-align: center;
+    /* text-align: center; */
     color: white;
     font-size: 4rem;
-    margin-bottom: 8px;
+    margin: 8px 30px 
+    /* margin-bottom: 8px;
+    margin-top: 10px; */
 }
 
 li {
@@ -16,4 +19,21 @@ li {
     margin-right: 120px;
     margin-left: 132px;
     margin-top: 0px;
+}
+img {
+    width: 7rem;
+    height: 3.5rem;
+
+}
+
+#top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#left{
+    transform: scaleX(-1);
 }
