@@ -1,4 +1,19 @@
-
+body{
+    background: url(../images/war-2930360_1920.jpg);
+}
 h1 {
     text-align: center;
+    color: white;
+    font-size: 4rem;
+    margin-bottom: 8px;
+}
+
+li {
+    display: inline-block;
+    color: white;
+    font-size: 2rem;
+    justify-items: space-between;
+    margin-right: 120px;
+    margin-left: 132px;
+    margin-top: 0px;
 }
