@@ -39,13 +39,13 @@ Rules for two-player game:
 # Wire frames
 
  - Home Page
- ![Home](/assets/wireframes/Home-Page.png)
+ ![Home](/assets/wireframes/Home-Page1.png)
 
  - Play
  ![Play](/assets/wireframes/Play.png)
 
   - Make your move
- ![Make your move](/assets/wireframes/Make-Your-Move.png)
+ ![Make your move](/assets/wireframes/Make-Your-Move1.png)
 
  - War
  ![War](/assets/wireframes/Play-War.png)
