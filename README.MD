@@ -37,7 +37,7 @@ Rules for two-player game:
 
 
 # Wire frames
-
+ ![Home Page](/assets/wireframes/Background.png)
 
 
 
