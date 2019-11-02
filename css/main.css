@@ -37,3 +37,12 @@ img {
 #left{
     transform: scaleX(-1);
 }
+
+#imageDeck{
+    align-content: center;
+    height: 12rem; 
+    /* display: inline; */
+    /* background-color: white;
+    width: 4rem;
+    height: 3rem; */
+}

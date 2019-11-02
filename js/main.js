@@ -1,24 +1,33 @@
-// import { readdir } from 'fs';
+/*----- constants -----*/
+const arrayCards = [];
 
+
+
+/*----- app's state (variables) -----*/
 let isGameOver = true;
 let isWar = false;
-
-let arrayCards = [];
 let arrayCardsTable = [];
 let cantPlayesr = 0;
 
 
 
-let player = {
+let player1 = {
     num: 1,
     score: 0,
     cards: [],
     score: 0
 }
 
+let player2 = {
+    num: 2,
+    score: 0,
+    cards: [],
+    score: 0
+}
 
-
-
+/*----- cached element references -----*/
+const ressetEl = document.getElementById("resset");
+const newGameEl = document.getElementById("newGame");
 
 // function flipCards(){
 
@@ -30,7 +39,8 @@ function findWinner (card1, card2){
 
 
 
-function flipUpCard(card){
+function flipUpCard(){
+
 
 }
 
@@ -62,5 +72,23 @@ function shufleCards(arrayCards){
       }
         
 
+function dealCards(arrayCards){
+    console.log("entro a deal cards")
+    for ( i = 1; i <= arrayCards.length; i++){
+        console.log("entro al for")
+        if (i % 2 === 0){
+            console.log("par")
+            player1.cards.push(arrayCards[i])
+        }else{
+            console.log("impar")
+            player2.cards.push(arrayCards[i])
+        }
+    }
+}
+
+
+function ressetGame(){
+    location.reload(); 
+ }
 
 createDeck()
