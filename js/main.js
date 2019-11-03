@@ -11,6 +11,7 @@ let cantPlayesr = 0;
 
 
 
+
 let player1 = {
     num: 1,
     score: 0,
@@ -28,18 +29,38 @@ let player2 = {
 /*----- cached element references -----*/
 const ressetEl = document.getElementById("resset");
 const newGameEl = document.getElementById("newGame");
+const batleCardsEl = document.getElementById("batleCards");
+const playerTwoEl = document.getElementById("playerTwo");
 
 // function flipCards(){
 
 // }
 
+
+function newGame(){
+    shufleCards(arrayCards);
+    dealCards();
+}
+
+
 function findWinner (card1, card2){
-   return (card1 > card2) ? card1 : card2
+   return (card1 > card2) ? card1 : card2;
 }
 
 
 
-function flipUpCard(){
+function flipUpCards(){
+    let img2El = document.createElement('img');
+    img2El.setAttribute("src", player2.cards[(player2.cards.length - 1)].url);
+    img2El.setAttribute("id",'"cardP2');
+    img2El.classList.add("card");
+    batleCardsEl.appendChild(img2El);
+
+    let img1El = document.createElement('img');
+    img1El.setAttribute("src",(player1.cards[(player1.cards.length - 1)].url));
+    img1El.setAttribute("id",'"cardP1');
+    img1El.classList.add("card");
+    batleCardsEl.appendChild(img1El);
 
 
 }
@@ -49,12 +70,28 @@ function AddCarsdsToArray(){
 }
 
 function createDeck() {
-   for (i= 2; i < 15; i++){
-       let cHeart = "../assets/card-deck-css/images/hearts";
-       let cClubs = "../assets/card-deck-css/images/clubs";
-       let cDiamonds = "../assets/card-deck-css/images/diamonds";
-       let cSpades = "../assets/card-deck-css/images/spades";
-        arrayCards.push({cHeart: i}, {cClubs: i}, {cDiamonds :i}, {cSpades: i});
+    for (i= 1; i < 15; i++){
+        let cardD = {},cardH = {},cardC = {},cardS = {};
+
+        cardD.url = `assets/card-deck/diamonds/diamonds-${i}.svg`;              
+        cardD.value = i;
+
+        cardH.url = `assets/card-deck/hearts/hearts-${i}.svg`;              
+        cardH.value = i;
+
+        cardC.url = `assets/card-deck/clubs/clubs-${i}.svg`;              
+        cardC.value = i;
+
+        cardS.url = `assets/card-deck/spades/spades-${i}.svg`;              
+        cardS.value = i;
+
+    //    let cHeart = "../assets/card-deck-css/images/hearts";
+    //    let cClubs = "../assets/card-deck-css/images/clubs";
+
+    //    let cSpades = "../assets/card-deck-css/images/spades";
+        // arrayCards.push({url: cHeart, value: i}, {url: cClubs, value: i}, {url: cDiamonds, value: i}, {url: cSpades, value: i});
+        arrayCards.push(cardD,cardH,cardC,cardS);
+        console.log(arrayCards);
    }
 }
 
@@ -72,16 +109,12 @@ function shufleCards(arrayCards){
       }
         
 
-function dealCards(arrayCards){
-    console.log("entro a deal cards")
-    for ( i = 1; i <= arrayCards.length; i++){
-        console.log("entro al for")
+function dealCards(){
+    for ( i = 1; i < arrayCards.length; i++){
         if (i % 2 === 0){
-            console.log("par")
             player1.cards.push(arrayCards[i])
         }else{
-            console.log("impar")
-            player2.cards.push(arrayCards[i])
+             player2.cards.push(arrayCards[i])
         }
     }
 }
@@ -92,3 +125,5 @@ function ressetGame(){
  }
 
 createDeck()
+dealCards()
+flipUpCards()

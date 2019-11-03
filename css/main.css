@@ -3,12 +3,10 @@ body{
     background-size: cover;
 }
 h1 {
-    /* text-align: center; */
     color: white;
     font-size: 4rem;
-    margin: 8px 30px 
-    /* margin-bottom: 8px;
-    margin-top: 10px; */
+    margin: 4px 30px 
+
 }
 
 li {
@@ -46,3 +44,30 @@ img {
     width: 4rem;
     height: 3rem; */
 }
+
+.tableGame {
+    height: 7rem;
+    width: 5rem;
+    background-color: white;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.card{ 
+    background-color: white;
+    width: 5rem;
+    height: 4rem;
+    
+}
+
+#batleCards{
+   
+}
+#cardP1{
+   
+}
+#cardP1{
+ 
+}
+
+

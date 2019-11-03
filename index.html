@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="assets/tank2.png" type="image/x-icon" /> 
+    <link rel="shortcut icon" href="assets/tank.png" type="image/x-icon" /> 
     <link rel="stylesheet" href="css/main.css">
-    <script src="js/main.js"></script>
+    <!-- <script src="js/main.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script defer src="js/main.js"></script>
+    
     <title>War</title>
 
 </head>
@@ -38,12 +41,20 @@
     <!-- <img src="https://media.giphy.com/media/j9KYEf8WA1pxC/giphy.gif">
     <IMG SRC="https://media.giphy.com/media/1lwtueIn9pEX6ihEl2/giphy.gif"> -->
     
-    <div id='imageDeck'>
-        <img src="assets/grenade.png" alt="">
-    </div>
-
     <!-- <div id='imageDeck'>
-        <img src="assets/card-deck-css/images/hearts/hearts-K.svg" alt="">
+        <img src="assets/grenade.png" alt="">
+    </div> -->
+    <div>
+    <div class="tableGame" id='playerOne'></div>
+
+    <div class="tableGame" id='batleCards'></div>
+    
+    <div class="tableGame" id='playerTwo'></div>
+    <div class="warLeft" id='playerTwo'></div>
+    <div class="warRight" id='playerTwo'></div>
+    </div>
+    <!-- <div id='imageDeck'>
+        <img src="assets/card-deck/diamonds/diamonds-4.svg" alt="">
     </div> -->
 
     <div id= "top"></div>
