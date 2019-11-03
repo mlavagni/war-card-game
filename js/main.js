@@ -43,8 +43,38 @@ function newGame(){
 }
 
 
-function findWinner (card1, card2){
-   return (card1 > card2) ? card1 : card2;
+function findWinner (){
+    let valCard1 = player1.cards[player1.cards.length-1].value;
+    let valCard2 = player2.cards[player2.cards.length-1].value;
+
+    let c2 = player2.cards.pop()
+    let c1 = player1.cards.pop()
+
+   if(valCard1 > valCard2){
+    //    console.log(test.url + " test")
+        player1.cards.unshift(c2,c1)
+        //rewardWinner(player1.cards,player2.cards)
+     }else if(valCard1 < valCard2){
+        // console.log(test.url + " test")
+         player2.cards.unshift(c2,c1)
+//     // rewardWinner(player2.cards,player1.cards)
+//     player1.cards.unshift(player2.cards.pop())
+//    }else{
+//     console.log("war")
+   }
+//    batleCardsEl.removeChild();
+   //let element = document.getElementById("top");
+    while (batleCardsEl.firstChild) {
+        batleCardsEl.removeChild(batleCardsEl.firstChild);
+    }
+}
+
+function rewardWinner(wPlayer, lplayer){
+    console.log("llego a buscar winner")
+    console.log(wPlayer + " player");
+     let test = lplayer.cards.pop()
+    // console.log("test " + test)
+    // wPlayer.cards.unshift(lplayer.cards.pop)
 }
 
 
@@ -61,8 +91,6 @@ function flipUpCards(){
     img1El.setAttribute("id",'"cardP1');
     img1El.classList.add("card");
     batleCardsEl.appendChild(img1El);
-
-
 }
 
 function AddCarsdsToArray(){
@@ -70,12 +98,13 @@ function AddCarsdsToArray(){
 }
 
 function createDeck() {
-    for (i= 1; i < 15; i++){
+    console.log(arrayCards.length + " al iniciar")
+    for (i= 2; i < 15; i++){
         let cardD = {},cardH = {},cardC = {},cardS = {};
 
         cardD.url = `assets/card-deck/diamonds/diamonds-${i}.svg`;              
         cardD.value = i;
-
+       
         cardH.url = `assets/card-deck/hearts/hearts-${i}.svg`;              
         cardH.value = i;
 
@@ -84,18 +113,12 @@ function createDeck() {
 
         cardS.url = `assets/card-deck/spades/spades-${i}.svg`;              
         cardS.value = i;
-
-    //    let cHeart = "../assets/card-deck-css/images/hearts";
-    //    let cClubs = "../assets/card-deck-css/images/clubs";
-
-    //    let cSpades = "../assets/card-deck-css/images/spades";
-        // arrayCards.push({url: cHeart, value: i}, {url: cClubs, value: i}, {url: cDiamonds, value: i}, {url: cSpades, value: i});
+        console.log(cardD.value + " ",cardH.value+ " ",cardC.value+ " ",cardS.value+ " ")
         arrayCards.push(cardD,cardH,cardC,cardS);
-        console.log(arrayCards);
    }
 }
 
-function shufleCards(arrayCards){
+function shufleCards(){
         var i = 0
           , j = 0
           , temp = null
@@ -110,7 +133,8 @@ function shufleCards(arrayCards){
         
 
 function dealCards(){
-    for ( i = 1; i < arrayCards.length; i++){
+      
+    for ( i = 0; i < arrayCards.length; i++){
         if (i % 2 === 0){
             player1.cards.push(arrayCards[i])
         }else{
@@ -124,6 +148,16 @@ function ressetGame(){
     location.reload(); 
  }
 
-createDeck()
-dealCards()
-flipUpCards()
+ function gametest(){
+    createDeck()
+     shufleCards()
+     shufleCards()
+     shufleCards()
+     dealCards()
+    flipUpCards()
+    // findWinner();
+ }
+
+
+
+ gametest()
