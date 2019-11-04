@@ -32,6 +32,8 @@ const newGameEl = document.getElementById("newGame");
 const batleCardsEl = document.getElementById("batleCards");
 const playerTwoEl = document.getElementById("playerTwo");
 const nextMoveEl = document.getElementById("nextMoveImg");
+const gameBoardEl = document.getElementById("gameBoard");
+const homeDivEl = document.getElementById("home");
 /*----- event listeners -----*/
 nextMoveEl.addEventListener('click', nextMoveClick);
 ressetEl.addEventListener('click', ressetGame);
@@ -55,6 +57,27 @@ function nextMoveClick(evt){
 
 function newGame(){
     gameOver = false;
+    homeDivEl.style.visibility = 'hidden';
+    gameBoardEl.style.visibility = 'visible';
+   
+    // let backCar1El = document.createElement('img');
+    // backCar1El.setAttribute("src", "assets/card-deck/backs/blue.svg");
+    // backCar1El.setAttribute("id",'"backCardP1');
+    // backCar1El.classList.add("card");
+    //gameBoardEl.children[0].appendChild(addCardsToTheBoard("assets/card-deck/backs/blue.svg",backCardP1,card));
+
+    let backCar1El = document.createElement('img');
+    backCar1El.setAttribute("src", "assets/card-deck/backs/blue.svg");
+    backCar1El.setAttribute("id",'"backCardP1');
+    backCar1El.classList.add("cardBack");
+    gameBoardEl.children[0].appendChild(backCar1El)
+
+    let backCar2El = document.createElement('img');
+    backCar2El.setAttribute("src", "assets/card-deck/backs/red.svg");
+    backCar2El.setAttribute("id",'"backCardP1');
+    backCar2El.classList.add("cardBack");
+    gameBoardEl.children[2].appendChild(backCar2El)
+  
     createDeck()
     shufleCards()
     shufleCards()
@@ -62,49 +85,59 @@ function newGame(){
     dealCards()
 }
 
+function addCardsToTheBoard(url, idTag,classTag){
+    let backCar1El = document.createElement('img');
+    backCar1El.setAttribute("src", url);
+    backCar1El.setAttribute("id", idTag);
+    backCar1El.classList.add(classTag);
+    return backCar1El
+}
 
 function findWinner (){
     let valCard1 = player1.cards[player1.cards.length-1].value;
     let valCard2 = player2.cards[player2.cards.length-1].value;
 
-    let c2 = player2.cards.pop()
-    let c1 = player1.cards.pop()
+    if(valCard1 === valCard2){
+        tempAlert("War!!!!!!!!", 4000)
+        war()
+        isWar=true
+    }else{
 
-   if(valCard1 > valCard2){
-        player1.cards.unshift(c2,c1)
-        tempAlert("Player One wins", 3000)
-       // messageWinner("Player One")
-     }else if(valCard1 < valCard2){
-         player2.cards.unshift(c2,c1)
-         tempAlert("Player two wins", 3000)
-        // messageWinner("Player One")
-        }else{
-            console.log("War!!!!!!!!")
+   
+        let c2 = player2.cards.pop()
+        let c1 = player1.cards.pop()
+
+        if(valCard1 > valCard2){
+            player1.cards.unshift(c2,c1)
+            tempAlert("Player One wins", 3000)
+            // batleCardsEl.children[0].remove();
+            }else if(valCard1 < valCard2){
+                player2.cards.unshift(c2,c1)
+                tempAlert("Player two wins", 3000)
+            //  batleCardsEl.children[0].removeChild();
+            // }else{
+            //     tempAlert("War!!!!!!!!", 4000)
+                }
+            
+        while (batleCardsEl.firstChild) {
+            batleCardsEl.removeChild(batleCardsEl.firstChild);
         }
-        
-    while (batleCardsEl.firstChild) {
-        batleCardsEl.removeChild(batleCardsEl.firstChild);
     }
+  
 }
 
 function tempAlert(msg,duration)
 {
- var el = document.createElement("div");
- el.setAttribute("style","position:absolute;top:40%;left:35%;background-color:white;height:20%;width:40%;font-size:4rem;");
- el.innerHTML = msg;
- setTimeout(function(){
-  el.parentNode.removeChild(el);
- },duration);
- document.body.appendChild(el);
+  
+        var el = document.createElement("div");
+        el.setAttribute("style","position:absolute;top:40%;left:35%;background-color:white;height:20%;width:40%;font-size:4rem;");
+        el.innerHTML = msg;
+        setTimeout(function(){
+        el.parentNode.removeChild(el);
+        },duration);
+        document.body.appendChild(el);    
 }
 
-// function messageWinner(message){
-//     tempAlert(`${message} wins this battle`,3000);
-    
-// //     setTimeout(function() { 
-// //         alert(`${message} wins this battle`); 
-// //   }, 5000);
-// }
 
 function rewardWinner(wPlayer, lplayer){
     console.log("llego a buscar winner")
@@ -113,7 +146,6 @@ function rewardWinner(wPlayer, lplayer){
     // console.log("test " + test)
     // wPlayer.cards.unshift(lplayer.cards.pop)
 }
-
 
 
 function flipUpCards(){
@@ -135,7 +167,6 @@ function AddCarsdsToArray(){
 }
 
 function createDeck() {
-    console.log(arrayCards.length + " al iniciar")
     for (i= 2; i < 15; i++){
         let cardD = {},cardH = {},cardC = {},cardS = {};
 
@@ -150,7 +181,7 @@ function createDeck() {
 
         cardS.url = `assets/card-deck/spades/spades-${i}.svg`;              
         cardS.value = i;
-        console.log(cardD.value + " ",cardH.value+ " ",cardC.value+ " ",cardS.value+ " ")
+    
         arrayCards.push(cardD,cardH,cardC,cardS);
    }
 }
@@ -185,14 +216,28 @@ function ressetGame(){
     location.reload(); 
  }
 
- function gametest(){
-    createDeck()
-     shufleCards()
-     shufleCards()
-     shufleCards()
-     dealCards()
-    flipUpCards()
-    
+ function war(){
+    let war2El = document.createElement('img');
+    war2El.setAttribute("src", player2.cards[(player2.cards.length - 5)].url);
+    war2El.setAttribute("id",'"cardP2');
+    war2El.classList.add("card");
+    gameBoardEl.children[4].appendChild(war2El)
+
+    let war1El = document.createElement('img');
+    war1El.setAttribute("src",(player1.cards[(player1.cards.length - 5)].url));
+    war1El.setAttribute("id",'"cardP1');
+    war1El.classList.add("card");
+    gameBoardEl.children[3].appendChild(war1El)
  }
+
+//  function gametest(){
+//     createDeck()
+//      shufleCards()
+//      shufleCards()
+//      shufleCards()
+//      dealCards()
+//     flipUpCards()
+    
+//  }
 
 
