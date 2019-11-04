@@ -40,8 +40,11 @@ newGameEl.addEventListener('click', newGame);
 function nextMoveClick(evt){
     if(!gameOver) {
        console.log("nextMove")  
-       flipUpCards()
-        
+      
+      
+        flipUpCards(); 
+        setTimeout(function() {}, 1500);
+
        setTimeout(function() {  
         findWinner(); 
     }, 1500);
@@ -87,7 +90,7 @@ function findWinner (){
 function tempAlert(msg,duration)
 {
  var el = document.createElement("div");
- el.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;hight:200px;width:400px;");
+ el.setAttribute("style","position:absolute;top:40%;left:35%;background-color:white;height:20%;width:40%;font-size:4rem;");
  el.innerHTML = msg;
  setTimeout(function(){
   el.parentNode.removeChild(el);

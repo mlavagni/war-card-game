@@ -86,5 +86,20 @@ img {
     width: 4rem;
 }
 
+#gameBoard{
+    visibility: hidden;
+}
 
-
+#home{
+    position:absolute;
+    top:40%;
+    left:40%;
+    /* height:50%;
+    width:50%; */
+    
+}
+#home img{
+    height:40%;
+    width:40%;
+    
+}
