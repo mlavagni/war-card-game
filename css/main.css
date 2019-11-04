@@ -70,4 +70,21 @@ img {
  
 }
 
+#nextMove{
+    /* display: flex; */
+    /* background-color:white; */
+    text-align: center;
+    border: 4px solid white;
+}
+#nextMoveImg{
+    /* justify-content: right;
+    justify-items: right;
+    align-content: center;
+    align-items: right; */
+   
+    height: 4rem;
+    width: 4rem;
+}
+
+
 

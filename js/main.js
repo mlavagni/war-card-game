@@ -31,15 +31,26 @@ const ressetEl = document.getElementById("resset");
 const newGameEl = document.getElementById("newGame");
 const batleCardsEl = document.getElementById("batleCards");
 const playerTwoEl = document.getElementById("playerTwo");
+const nextMoveEl = document.getElementById("nextMoveImg");
+/*----- event listeners -----*/
+nextMoveEl.addEventListener('click', nextMoveClick);
+ressetEl.addEventListener('click', ressetGame);
+newGameEl.addEventListener('click', newGame);
 
-// function flipCards(){
-
-// }
-
+function nextMoveClick(evt){
+    if(!gameOver) {
+       console.log("nextMove")  
+       flipUpCards()
+    }
+}
 
 function newGame(){
-    shufleCards(arrayCards);
-    dealCards();
+    gameOver = false;
+    createDeck()
+    shufleCards()
+    shufleCards()
+    shufleCards()
+    dealCards()
 }
 
 
@@ -51,19 +62,13 @@ function findWinner (){
     let c1 = player1.cards.pop()
 
    if(valCard1 > valCard2){
-    //    console.log(test.url + " test")
         player1.cards.unshift(c2,c1)
-        //rewardWinner(player1.cards,player2.cards)
      }else if(valCard1 < valCard2){
-        // console.log(test.url + " test")
          player2.cards.unshift(c2,c1)
-//     // rewardWinner(player2.cards,player1.cards)
-//     player1.cards.unshift(player2.cards.pop())
-//    }else{
-//     console.log("war")
-   }
-//    batleCardsEl.removeChild();
-   //let element = document.getElementById("top");
+        }else{
+            console.log("war")
+        }
+        
     while (batleCardsEl.firstChild) {
         batleCardsEl.removeChild(batleCardsEl.firstChild);
     }
@@ -155,9 +160,7 @@ function ressetGame(){
      shufleCards()
      dealCards()
     flipUpCards()
-    // findWinner();
+    
  }
 
 
-
- gametest()
