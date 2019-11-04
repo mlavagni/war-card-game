@@ -41,7 +41,13 @@ function nextMoveClick(evt){
     if(!gameOver) {
        console.log("nextMove")  
        flipUpCards()
+        
+       setTimeout(function() {  
+        findWinner(); 
+    }, 1500);
+    
     }
+
 }
 
 function newGame(){
@@ -63,16 +69,39 @@ function findWinner (){
 
    if(valCard1 > valCard2){
         player1.cards.unshift(c2,c1)
+        tempAlert("Player One wins", 3000)
+       // messageWinner("Player One")
      }else if(valCard1 < valCard2){
          player2.cards.unshift(c2,c1)
+         tempAlert("Player two wins", 3000)
+        // messageWinner("Player One")
         }else{
-            console.log("war")
+            console.log("War!!!!!!!!")
         }
         
     while (batleCardsEl.firstChild) {
         batleCardsEl.removeChild(batleCardsEl.firstChild);
     }
 }
+
+function tempAlert(msg,duration)
+{
+ var el = document.createElement("div");
+ el.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;hight:200px;width:400px;");
+ el.innerHTML = msg;
+ setTimeout(function(){
+  el.parentNode.removeChild(el);
+ },duration);
+ document.body.appendChild(el);
+}
+
+// function messageWinner(message){
+//     tempAlert(`${message} wins this battle`,3000);
+    
+// //     setTimeout(function() { 
+// //         alert(`${message} wins this battle`); 
+// //   }, 5000);
+// }
 
 function rewardWinner(wPlayer, lplayer){
     console.log("llego a buscar winner")
