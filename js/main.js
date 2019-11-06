@@ -2,13 +2,15 @@
 const arrayCards = [];
 
 
-
 /*----- app's state (variables) -----*/
 let isGameOver = true;
 let isWar = false;
 let arrayCardsTable = [];
+let arrayCardsInGame = [];
 let cantPlayesr = 0;
-
+// let startIdxWar = 5;
+let startIdxWar = 1;
+let startIdx = 1;
 
 
 
@@ -34,22 +36,22 @@ const playerTwoEl = document.getElementById("playerTwo");
 const nextMoveEl = document.getElementById("nextMoveImg");
 const gameBoardEl = document.getElementById("gameBoard");
 const homeDivEl = document.getElementById("home");
+const warCardsEl = document.querySelectorAll(".warCard");
+
 /*----- event listeners -----*/
 nextMoveEl.addEventListener('click', nextMoveClick);
 ressetEl.addEventListener('click', ressetGame);
 newGameEl.addEventListener('click', newGame);
 
-function nextMoveClick(evt){
-    if(!gameOver) {
-       console.log("nextMove")  
-      
-      
-        flipUpCards(); 
-        setTimeout(function() {}, 1500);
 
-       setTimeout(function() {  
-        findWinner(); 
-    }, 1500);
+function nextMoveClick(evt){
+    if(!gameOver) { 
+        nextMoveEl.removeEventListener('click', nextMoveClick);
+        flipUpCards(); 
+
+        setTimeout(function() {  
+            findWinner(); 
+    }, 2000);
     
     }
 
@@ -59,111 +61,86 @@ function newGame(){
     gameOver = false;
     homeDivEl.style.visibility = 'hidden';
     gameBoardEl.style.visibility = 'visible';
-   
-    // let backCar1El = document.createElement('img');
-    // backCar1El.setAttribute("src", "assets/card-deck/backs/blue.svg");
-    // backCar1El.setAttribute("id",'"backCardP1');
-    // backCar1El.classList.add("card");
-    //gameBoardEl.children[0].appendChild(addCardsToTheBoard("assets/card-deck/backs/blue.svg",backCardP1,card));
 
-    let backCar1El = document.createElement('img');
-    backCar1El.setAttribute("src", "assets/card-deck/backs/blue.svg");
-    backCar1El.setAttribute("id",'"backCardP1');
-    backCar1El.classList.add("cardBack");
-    gameBoardEl.children[0].appendChild(backCar1El)
+    let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
+    gameBoardEl.children[0].appendChild(card1)
 
-    let backCar2El = document.createElement('img');
-    backCar2El.setAttribute("src", "assets/card-deck/backs/red.svg");
-    backCar2El.setAttribute("id",'"backCardP1');
-    backCar2El.classList.add("cardBack");
-    gameBoardEl.children[2].appendChild(backCar2El)
+    let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
+    gameBoardEl.children[2].appendChild(card2)
   
     createDeck()
-    shufleCards()
     shufleCards()
     shufleCards()
     dealCards()
 }
 
-function addCardsToTheBoard(url, idTag,classTag){
-    let backCar1El = document.createElement('img');
-    backCar1El.setAttribute("src", url);
-    backCar1El.setAttribute("id", idTag);
-    backCar1El.classList.add(classTag);
-    return backCar1El
-}
 
-function findWinner (){
-    let valCard1 = player1.cards[player1.cards.length-1].value;
-    let valCard2 = player2.cards[player2.cards.length-1].value;
+function findWinner(){
+ 
+    let valCard1 = player1.cards[player1.cards.length-startIdx].value;
+    let valCard2 = player2.cards[player2.cards.length-startIdx].value;
 
     if(valCard1 === valCard2){
         tempAlert("War!!!!!!!!", 4000)
-        war()
+        startIdx = (startIdx===1) ? startIdx = 4 : startIdx += 3
         isWar=true
-    }else{
-
-   
-        let c2 = player2.cards.pop()
-        let c1 = player1.cards.pop()
-
+        flipUpCards()
+        findWinner()
+    }else{  
         if(valCard1 > valCard2){
-            player1.cards.unshift(c2,c1)
-            tempAlert("Player One wins", 3000)
-            // batleCardsEl.children[0].remove();
-            }else if(valCard1 < valCard2){
-                player2.cards.unshift(c2,c1)
-                tempAlert("Player two wins", 3000)
-            //  batleCardsEl.children[0].removeChild();
-            // }else{
-            //     tempAlert("War!!!!!!!!", 4000)
-                }
-            
-        while (batleCardsEl.firstChild) {
-            batleCardsEl.removeChild(batleCardsEl.firstChild);
+            tempAlert("Player One wins", 1300)
+            player1.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player1.cards))   
+        }else if(valCard1 < valCard2){
+            tempAlert("Player two wins", 1300)
+            player2.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player2.cards))   
         }
+        startIdx = 1;
+        isWar = false;
+        setTimeout(deleteCards, 1700) 
+     }
+   
+}
+
+function deleteCards() {
+    while (batleCardsEl.firstChild) {
+        batleCardsEl.removeChild(batleCardsEl.firstChild);
     }
-  
+    warCardsEl.forEach(function(div){
+        while(div.firstChild){
+            div.removeChild(div.firstChild);
+        }
+    })
+    nextMoveEl.addEventListener('click', nextMoveClick);
+  }
+
+//**************************
+function flipUpCards(){
+    if (!isWar){
+        batleCardsEl.appendChild(addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardP2", "card"));
+        batleCardsEl.appendChild(addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardP1", "card"));
+    } else{
+        gameBoardEl.children[3].appendChild((addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardWarP1", "card")));
+        gameBoardEl.children[4].appendChild((addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardWarP2", "card")));
+    }
+}
+
+function addCardsToTheBoard(url, idTag,classTag){
+    let imgEl = document.createElement('img');
+    imgEl.setAttribute("src", url);
+    imgEl.setAttribute("id", idTag);
+    imgEl.classList.add(classTag);
+    return imgEl
 }
 
 function tempAlert(msg,duration)
 {
-  
-        var el = document.createElement("div");
-        el.setAttribute("style","position:absolute;top:40%;left:35%;background-color:white;height:20%;width:40%;font-size:4rem;");
-        el.innerHTML = msg;
-        setTimeout(function(){
-        el.parentNode.removeChild(el);
-        },duration);
-        document.body.appendChild(el);    
-}
-
-
-function rewardWinner(wPlayer, lplayer){
-    console.log("llego a buscar winner")
-    console.log(wPlayer + " player");
-     let test = lplayer.cards.pop()
-    // console.log("test " + test)
-    // wPlayer.cards.unshift(lplayer.cards.pop)
-}
-
-
-function flipUpCards(){
-    let img2El = document.createElement('img');
-    img2El.setAttribute("src", player2.cards[(player2.cards.length - 1)].url);
-    img2El.setAttribute("id",'"cardP2');
-    img2El.classList.add("card");
-    batleCardsEl.appendChild(img2El);
-
-    let img1El = document.createElement('img');
-    img1El.setAttribute("src",(player1.cards[(player1.cards.length - 1)].url));
-    img1El.setAttribute("id",'"cardP1');
-    img1El.classList.add("card");
-    batleCardsEl.appendChild(img1El);
-}
-
-function AddCarsdsToArray(){
-   // arrayCards
+    var el = document.createElement("div");
+    el.setAttribute("style","position:absolute;top:40%;left:55%;background-color:white;height:10%;width:30%;font-size:2.5rem;text-align:center;");
+    el.innerHTML = msg;
+    setTimeout(function(){
+    el.parentNode.removeChild(el);
+    },duration);
+    document.body.appendChild(el);    
 }
 
 function createDeck() {
@@ -182,26 +159,22 @@ function createDeck() {
         cardS.url = `assets/card-deck/spades/spades-${i}.svg`;              
         cardS.value = i;
     
-        arrayCards.push(cardD,cardH,cardC,cardS);
+       arrayCards.push(cardD,cardH,cardC,cardS);
    }
 }
 
 function shufleCards(){
-        var i = 0
-          , j = 0
-          , temp = null
-      
-        for (i = arrayCards.length - 1; i > 0; i -= 1) {
-          j = Math.floor(Math.random() * (i + 1))
-          temp = arrayCards[i]
-          arrayCards[i] = arrayCards[j]
-          arrayCards[j] = temp
-        }
-      }
+    var i = 0, j = 0, temp = null
+    
+    for (i = arrayCards.length - 1; i > 0; i -= 1) {
+        j = Math.floor(Math.random() * (i + 1))
+        temp = arrayCards[i]
+        arrayCards[i] = arrayCards[j]
+        arrayCards[j] = temp
+    }
+}
         
-
-function dealCards(){
-      
+function dealCards(){  
     for ( i = 0; i < arrayCards.length; i++){
         if (i % 2 === 0){
             player1.cards.push(arrayCards[i])
@@ -211,33 +184,8 @@ function dealCards(){
     }
 }
 
-
 function ressetGame(){
     location.reload(); 
  }
-
- function war(){
-    let war2El = document.createElement('img');
-    war2El.setAttribute("src", player2.cards[(player2.cards.length - 5)].url);
-    war2El.setAttribute("id",'"cardP2');
-    war2El.classList.add("card");
-    gameBoardEl.children[4].appendChild(war2El)
-
-    let war1El = document.createElement('img');
-    war1El.setAttribute("src",(player1.cards[(player1.cards.length - 5)].url));
-    war1El.setAttribute("id",'"cardP1');
-    war1El.classList.add("card");
-    gameBoardEl.children[3].appendChild(war1El)
- }
-
-//  function gametest(){
-//     createDeck()
-//      shufleCards()
-//      shufleCards()
-//      shufleCards()
-//      dealCards()
-//     flipUpCards()
-    
-//  }
 
 

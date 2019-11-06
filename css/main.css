@@ -5,8 +5,7 @@ body{
 h1 {
     color: white;
     font-size: 4rem;
-    margin: 4px 30px 
-
+    margin: 15px 30px 
 }
 
 li {
@@ -18,11 +17,7 @@ li {
     margin-left: 132px;
     margin-top: 0px;
 }
-img {
-    width: 7rem;
-    height: 3.5rem;
 
-}
 
 #top{
     display: flex;
@@ -56,19 +51,9 @@ img {
 .card{ 
     background-color: white;
     width: 5rem;
-    height: 4rem;
-    
+    height: 4rem;   
 }
 
-#batleCards{
-   
-}
-#cardP1{
-   
-}
-#cardP1{
- 
-}
 
 #nextMove{
     /* display: flex; */
@@ -84,11 +69,8 @@ img {
     justify-items: right;
     align-content: center;
     align-items: right; */
-   
     height: 4rem;
     width: 4rem;
-
-    
 }
 
 #gameBoard{
@@ -120,15 +102,28 @@ img {
     
 }
 
+#warCards img{
+    /* height: 7rem;
+    width: 5rem; */
+    width: 7rem;
+    height: 5rem;
+}
+
+
 #home img{
     height:40%;
     width:40%;
     
 }
 
-.cardBack{
+.cardBack, .warCards img{
     height: 7rem;
     width: 5rem;
 
 }
 
+img {
+    width: 7rem;
+    height: 3.5rem;
+
+}
