@@ -112,6 +112,22 @@ function wait3s(){
     findWinner()
 }
 
+function checkEnoughCards(){
+    let message
+    if (isWar){
+       if ((player1.cards.length > 3) && (player2.cards.length > 3)){
+        message =  (player1.cards.length > player2.cards.length) ? "Player Wins": "Player2 Wins"
+        isGameOver = true;
+        alert(message)
+       }else if ((player1.cards.length > 0) && (player2.cards.length > 0)){
+        message =  (player1.cards.length > player2.cards.length) ? "Player Wins": "Player2 Wins"
+        isGameOver = true;
+        alert(message)
+       }
+    }
+    return isGameOver
+}
+
 function deleteCards() {
     while (batleCardsEl.firstChild) {
         batleCardsEl.removeChild(batleCardsEl.firstChild);
@@ -127,12 +143,14 @@ function deleteCards() {
 
 //**************************
 function flipUpCards(){
-    if (!isWar){
-        batleCardsEl.appendChild(addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardP2", "card"));
-        batleCardsEl.appendChild(addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardP1", "card"));
-    } else{
-        gameBoardEl.children[3].appendChild((addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardWarP1", "card")));
-        gameBoardEl.children[4].appendChild((addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardWarP2", "card")));
+    if (checkEnoughCards()){
+        if (!isWar){
+            batleCardsEl.appendChild(addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardP2", "card"));
+            batleCardsEl.appendChild(addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardP1", "card"));
+        } else{
+            gameBoardEl.children[3].appendChild((addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardWarP1", "card")));
+            gameBoardEl.children[4].appendChild((addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardWarP2", "card")));
+        }
     }
 }
 
@@ -156,7 +174,7 @@ function tempAlert(msg,duration)
     
 }
 
-function createDeck() {
+function createDeck2() {
     for (i= 2; i < 15; i++){
         let cardD = {},cardH = {},cardC = {},cardS = {};
 
@@ -175,24 +193,36 @@ function createDeck() {
        arrayCards.push(cardD,cardH,cardC,cardS);
    }
 }
-function createDeck2() {
-    for (i= 2; i < 15; i++){
-        let cardD = {},cardH = {},cardC = {},cardS = {};
+function createDeck() {
+        let cardD2 = {},cardD3 = {}, cardD4 = {}, cardD5 = {}, cardD6 = {} 
+        let cardH2 = {}, cardH3 = {}, cardH4 = {}, cardH5 = {} ,cardH6 = {}
 
-        cardD.url = `assets/card-deck/diamonds/diamonds-${5}.svg`;              
-        cardD.value = i;
+        cardD2.url = `assets/card-deck/diamonds/diamonds-2.svg`;
+        cardD2.value = 2;  
+        cardD3.url = `assets/card-deck/diamonds/diamonds-3.svg`; 
+        cardD3.value = 3;
+        cardD4.url = `assets/card-deck/diamonds/diamonds-4.svg`; 
+        cardD4.value = 4;
+        cardD5.url = `assets/card-deck/diamonds/diamonds-5.svg`;
+        cardD5.value = 5; 
+        cardD6.url = `assets/card-deck/diamonds/diamonds-6.svg`; 
+        cardD6.value = 6;            
+        
        
-        cardH.url = `assets/card-deck/hearts/hearts-${2}.svg`;              
-        cardH.value = i;
+        cardH2.url = `assets/card-deck/hearts/hearts-2.svg`;              
+        cardH2.value = 2;
+        cardH3.url = `assets/card-deck/hearts/hearts-3.svg`;              
+        cardH3.value = 3;
+        cardH4.url = `assets/card-deck/hearts/hearts-4.svg`;              
+        cardH4.value = 4;
+        cardH5.url = `assets/card-deck/hearts/hearts-5.svg`;              
+        cardH5.value = 5;
+        cardH6.url = `assets/card-deck/hearts/hearts-6.svg`;              
+        cardH6.value = 6;
 
-        cardC.url = `assets/card-deck/clubs/clubs-${4}.svg`;              
-        cardC.value = i;
-
-        cardS.url = `assets/card-deck/spades/spades-${4}.svg`;              
-        cardS.value = i;
     
-       arrayCards.push(cardD,cardH,cardC,cardS);
-   }
+       arrayCards.push(cardD2,cardD3,cardD4,cardD5,cardD6,cardH2,cardH3,cardH4,cardH5,cardH6);
+   
 }
 
 function shufleCards(){
