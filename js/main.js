@@ -37,6 +37,9 @@ const nextMoveEl = document.getElementById("nextMoveImg");
 const gameBoardEl = document.getElementById("gameBoard");
 const homeDivEl = document.getElementById("home");
 const warCardsEl = document.querySelectorAll(".warCard");
+const p1LabelEl = document.getElementById("p1CardsArray");
+const p2LabelEl = document.getElementById("p2CardsArray");
+
 
 /*----- event listeners -----*/
 nextMoveEl.addEventListener('click', nextMoveClick);
@@ -72,8 +75,8 @@ function newGame(){
     shufleCards()
     shufleCards()
     dealCards()
+    addScorePlayerLabel()
 }
-
 
 function findWinner(){
  
@@ -84,8 +87,7 @@ function findWinner(){
         tempAlert("War!!!!!!!!", 4000)
         startIdx = (startIdx===1) ? startIdx = 4 : startIdx += 3
         isWar=true
-        flipUpCards()
-        findWinner()
+        setTimeout(wait3s, 3000)
     }else{  
         if(valCard1 > valCard2){
             tempAlert("Player One wins", 1300)
@@ -98,7 +100,16 @@ function findWinner(){
         isWar = false;
         setTimeout(deleteCards, 1700) 
      }
-   
+}
+
+function addScorePlayerLabel(){
+    p1LabelEl.textContent = player1.cards.length
+    p2LabelEl.textContent = player2.cards.length
+}
+
+function wait3s(){
+    flipUpCards()
+    findWinner()
 }
 
 function deleteCards() {
@@ -110,6 +121,7 @@ function deleteCards() {
             div.removeChild(div.firstChild);
         }
     })
+    addScorePlayerLabel()
     nextMoveEl.addEventListener('click', nextMoveClick);
   }
 
@@ -138,9 +150,10 @@ function tempAlert(msg,duration)
     el.setAttribute("style","position:absolute;top:40%;left:55%;background-color:white;height:10%;width:30%;font-size:2.5rem;text-align:center;");
     el.innerHTML = msg;
     setTimeout(function(){
-    el.parentNode.removeChild(el);
+    el.parentNode.removeChild(el); 
     },duration);
-    document.body.appendChild(el);    
+    document.body.appendChild(el); 
+    
 }
 
 function createDeck() {
@@ -157,6 +170,25 @@ function createDeck() {
         cardC.value = i;
 
         cardS.url = `assets/card-deck/spades/spades-${i}.svg`;              
+        cardS.value = i;
+    
+       arrayCards.push(cardD,cardH,cardC,cardS);
+   }
+}
+function createDeck2() {
+    for (i= 2; i < 15; i++){
+        let cardD = {},cardH = {},cardC = {},cardS = {};
+
+        cardD.url = `assets/card-deck/diamonds/diamonds-${5}.svg`;              
+        cardD.value = i;
+       
+        cardH.url = `assets/card-deck/hearts/hearts-${2}.svg`;              
+        cardH.value = i;
+
+        cardC.url = `assets/card-deck/clubs/clubs-${4}.svg`;              
+        cardC.value = i;
+
+        cardS.url = `assets/card-deck/spades/spades-${4}.svg`;              
         cardS.value = i;
     
        arrayCards.push(cardD,cardH,cardC,cardS);
