@@ -48,7 +48,7 @@ newGameEl.addEventListener('click', newGame);
 
 
 function nextMoveClick(evt){
-    if(!gameOver) { 
+    if(!areNotEnoughCards()) { 
         nextMoveEl.removeEventListener('click', nextMoveClick);
         flipUpCards(); 
 
@@ -79,27 +79,29 @@ function newGame(){
 }
 
 function findWinner(){
- 
-    let valCard1 = player1.cards[player1.cards.length-startIdx].value;
-    let valCard2 = player2.cards[player2.cards.length-startIdx].value;
+    if (!isGameOver){
+        let valCard1 = player1.cards[player1.cards.length-startIdx].value;
+        let valCard2 = player2.cards[player2.cards.length-startIdx].value;
 
-    if(valCard1 === valCard2){
-        tempAlert("War!!!!!!!!", 4000)
-        startIdx = (startIdx===1) ? startIdx = 4 : startIdx += 3
-        isWar=true
-        setTimeout(wait3s, 3000)
-    }else{  
-        if(valCard1 > valCard2){
-            tempAlert("Player One wins", 1300)
-            player1.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player1.cards))   
-        }else if(valCard1 < valCard2){
-            tempAlert("Player two wins", 1300)
-            player2.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player2.cards))   
+        if(valCard1 === valCard2){
+            tempAlert("War!!!!!!!!", 4000)
+            startIdx = (startIdx===1) ? startIdx = 4 : startIdx += 3
+            isWar=true
+            setTimeout(wait3s, 3000)
+        }else{  
+            if(valCard1 > valCard2){
+                tempAlert("Player One wins", 1300)
+                player1.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player1.cards))   
+            }else if(valCard1 < valCard2){
+                tempAlert("Player two wins", 1300)
+                player2.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player2.cards))   
+            }
+            startIdx = 1;
+            isWar = false;
+            setTimeout(deleteCards, 1700) 
+            areNotEnoughCards()
         }
-        startIdx = 1;
-        isWar = false;
-        setTimeout(deleteCards, 1700) 
-     }
+    }
 }
 
 function addScorePlayerLabel(){
@@ -108,23 +110,27 @@ function addScorePlayerLabel(){
 }
 
 function wait3s(){
-    flipUpCards()
-    findWinner()
+    if (!gameOver){
+        flipUpCards()
+        findWinner()
+    }
+  
 }
 
-function checkEnoughCards(){
+function areNotEnoughCards(){
     let message
+    isGameOver = false;
     if (isWar){
-       if ((player1.cards.length > 3) && (player2.cards.length > 3)){
-        message =  (player1.cards.length > player2.cards.length) ? "Player Wins": "Player2 Wins"
-        isGameOver = true;
-        alert(message)
-       }else if ((player1.cards.length > 0) && (player2.cards.length > 0)){
-        message =  (player1.cards.length > player2.cards.length) ? "Player Wins": "Player2 Wins"
+       if ((player1.cards.length < 4) || (player2.cards.length < 4)){
+        message =  (player1.cards.length > player2.cards.length) ? "Player1 Wins the Game": "Player2 Wins the Game"
         isGameOver = true;
         alert(message)
        }
-    }
+    }else if ((player1.cards.length < 1) || (player2.cards.length < 1)){
+        message =  (player1.cards.length > player2.cards.length) ? "Player Wins the Game": "Player2 Wins the Game"
+        isGameOver = true;
+        alert(message)
+    } 
     return isGameOver
 }
 
@@ -143,7 +149,7 @@ function deleteCards() {
 
 //**************************
 function flipUpCards(){
-    if (checkEnoughCards()){
+    if (!areNotEnoughCards()){
         if (!isWar){
             batleCardsEl.appendChild(addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardP2", "card"));
             batleCardsEl.appendChild(addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardP1", "card"));

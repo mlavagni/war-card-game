@@ -20,10 +20,20 @@ li {
 
 
 #top{
-    display: flex;
+  
+    display: flex; 
+    /* position: fixed; */
+    text-align: right; 
     justify-content: center;
-    align-items: center;
+    margin-top: 40px;
+    /* align-items: center; */
 
+    /* width: 500px;
+    height: 200px;
+    top: 22%;
+    left: 50%;
+    margin-top: -100px; //Negative half of height. */
+    /* margin-left: -250px; */
 
 }
 
