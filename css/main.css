@@ -109,10 +109,23 @@ li {
     height: 5rem;
 }
 
-
+#homeImg{
+    /* transform: rotate(25deg);   */
+     animation: roll 3s infinite; 
+    transform: rotate(20deg);
+}
+@keyframes roll {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 #home img{
     height:40%;
     width:40%;
+   
     
 }
 
