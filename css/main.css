@@ -7,6 +7,7 @@
 body{
     background: url(../assets/backgrounds/background1.jpg) no-repeat center center fixed;
     background-size: cover;
+    font-family: 'Yeon Sung', cursive;
 }
 
 h1 {
@@ -98,7 +99,9 @@ h1 {
     margin: 0; 
     /* width: 12px;
     height: 12px; */
-    justify-self: right;
+    justify-self: baseline; 
+    align-self: center;
+   
 }
 .p1Cards{
     border-radius: 10px;
@@ -112,8 +115,9 @@ h1 {
 
 #nextMoveImg{
     align-items: center;
-    height: 4rem;
-    width: 4rem;
+    height: 6rem;
+    width: 6rem;
+   
 }
 
 #top{
@@ -193,20 +197,12 @@ p{
 
 }
 
-#warPlayerOne{
-    /* position:absolute; */
-    /* top:61.2%;
-    left:37%; 
-    height:50%;
-    width:50%; */
-  
-    
-}
-#warPlayerTwo{
-     /* position:absolute; */
-    /* top:61.2%;
-    left:55.8%; 
-     height:50%;
-    width:50%;  */
-    
-}
+@media (min-width: 400px) {
+    #homeImg{
+        height:300px;
+        width:300px;
+    }
+      }
+
+
+
