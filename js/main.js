@@ -12,16 +12,16 @@ let startIdx = 1;
 
 let player1 = {
     num: 1,
-    score: 0,
+    // score: 0,
     cards: [],
-    score: 0
+    // score: 0
 }
 
 let player2 = {
     num: 2,
-    score: 0,
+    // score: 0,
     cards: [],
-    score: 0
+    // score: 0
 }
 
 /*----- cached element references -----*/
