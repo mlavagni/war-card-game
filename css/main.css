@@ -19,7 +19,6 @@ h1 {
 nav{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    /* grid-template-rows: 1fr; */
     height: 7vh;
     width: 55vh;
     margin: 0 auto;
@@ -28,14 +27,9 @@ nav{
 }
 
 #newGame{
-    /* border-radius: 10px; */
-    /* background-color: white; */
-    /* color: rgb(230, 19, 19); */
     grid-column: 1/2;
     grid-row: 1/2;
-    /* align-self: center; */
     text-align: center;
-    /* margin-bottom: 15px; */
 }
 #resset{
     grid-column: 2/3;
@@ -89,16 +83,38 @@ nav{
     align-self: center;
 }
 
-#warPlayerOne{
+#warPlayerOne {
     grid-column: 1/2;
     grid-row: 3/4;
     margin: 0;
     justify-self: end; 
 }
+#warText1{
+    grid-column: 1/2;
+    grid-row: 3/4;
+    text-align: right;
+    align-self: center;
+    align-self: self-end;
+    font-size: 0.7rem;
+    margin-bottom: 35px;
+    margin-right: 5px;
+}
+
+#warText2{
+    grid-column: 3/4;
+    grid-row: 3/4;
+    text-align: left;
+    align-self: center;
+    align-self: self-end;
+    font-size: 0.7rem;
+    margin-bottom: 35px;
+    margin-left: 5px;
+}
 #warPlayerTwo{
     grid-column: 3/4;
     grid-row: 3/4;
-    margin: 0;  
+    margin: 0; 
+    /* justify-self: left;   */
 }
 
 #nextMove{
@@ -127,6 +143,10 @@ nav{
     width: 6rem;
    
 }
+#nextMoveImg:hover{
+    height: 7rem;
+    width: 7rem;
+}
 
 #top{
     display: flex; 
@@ -134,8 +154,6 @@ nav{
     justify-content: center;
     margin-top: 20px;
 }
-
-
 
 .tableGame {
     height: 6rem;
@@ -197,19 +215,57 @@ p{
 
 }
 
-
-
 #imageDeck{
     align-content: center; 
-    /* /* height: 12rem;  */
-
 }
 
-@media (min-width: 400px) {
+/* .warText{
+    color: black;
+} */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 400px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  #instructions:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content p {
+    color: black;
+    padding: 3px 5px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    max-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+
+  .rulesDrop{
+      font-size: 1rem;
+  }
+
+@media (max-width: 400px) {
     #homeImg{
-        height:200px;
-        width:200px;
+        height:250px;
+        width:250px;
+        justify-content: center;
     }
+/* 
+    #messageDiv{
+    font-size: 0.5rem;
+    } */
       }
 
 
