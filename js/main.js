@@ -127,7 +127,6 @@ function addScorePlayerLabel(){
 }
 
 function wait3s(){
-    //if (!gameOver){  cambie este
     if (!isGameOver){
         flipUpCards()
         findWinner()
@@ -165,7 +164,6 @@ function deleteCards() {
     nextMoveEl.addEventListener('click', nextMoveClick);
   }
 
-//**************************
 function flipUpCards(){
     if (!areNotEnoughCards()){
         if (!isWar){
@@ -219,46 +217,6 @@ function createDeck() {
        arrayCards.push(cardD,cardH,cardC,cardS);
    }
 }
-// function createDeck() {
-//         let cardD2 = {},cardD3 = {}, cardD4 = {}, cardD5 = {}, cardD6 = {},cardD7 = {} ,cardD8 = {}  
-//         let cardH2 = {}, cardH3 = {}, cardH4 = {}, cardH5 = {} ,cardH6 = {}, cardH7 = {},cardH8 = {}
-
-//         cardD2.url = `assets/card-deck/diamonds/diamonds-2.svg`;
-//         cardD2.value = 2;  
-//         cardD3.url = `assets/card-deck/diamonds/diamonds-3.svg`; 
-//         cardD3.value = 3;
-//         cardD4.url = `assets/card-deck/diamonds/diamonds-4.svg`; 
-//         cardD4.value = 4;
-//         cardD5.url = `assets/card-deck/diamonds/diamonds-5.svg`;
-//         cardD5.value = 5; 
-//         cardD6.url = `assets/card-deck/diamonds/diamonds-6.svg`; 
-//         cardD6.value = 6;  
-//         cardD7.url = `assets/card-deck/diamonds/diamonds-7.svg`; 
-//         cardD7.value = 7;  
-//         cardD8.url = `assets/card-deck/diamonds/diamonds-8.svg`; 
-//         cardD8.value = 8;          
-        
-       
-//         cardH2.url = `assets/card-deck/hearts/hearts-2.svg`;              
-//         cardH2.value = 2;
-//         cardH3.url = `assets/card-deck/hearts/hearts-3.svg`;              
-//         cardH3.value = 3;
-//         cardH4.url = `assets/card-deck/hearts/hearts-4.svg`;              
-//         cardH4.value = 4;
-//         cardH5.url = `assets/card-deck/hearts/hearts-5.svg`;              
-//         cardH5.value = 5;
-//         cardH6.url = `assets/card-deck/hearts/hearts-6.svg`;              
-//         cardH6.value = 6;
-//         cardH7.url = `assets/card-deck/hearts/hearts-7.svg`;              
-//         cardH7.value = 7;
-//         cardH8.url = `assets/card-deck/hearts/hearts-8.svg`;              
-//         cardH8.value = 8;
-        
-
-    
-//        arrayCards.push(cardD2,cardD3,cardD4,cardD5,cardD6,cardD7,cardD8,cardH2,cardH3,cardH4,cardH5,cardH6,cardH7,cardH8);
-   
-// }
 
 function shufleCards(){
     var i = 0, j = 0, temp = null
