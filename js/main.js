@@ -1,6 +1,6 @@
 /*----- constants -----*/
 const arrayCards = [];
-
+const player = new Audio();
 /*----- app's state (variables) -----*/
 let isGameOver = true;
 let isWar = false;
@@ -35,15 +35,17 @@ const homeDivEl = document.getElementById("home");
 const warCardsEl = document.querySelectorAll(".warCard");
 const p1LabelEl = document.getElementById("p1CardsArray");
 const p2LabelEl = document.getElementById("p2CardsArray");
-
+const soundEl = document.getElementById("left");
 
 /*----- event listeners -----*/
 nextMoveEl.addEventListener('click', nextMoveClick);
 ressetEl.addEventListener('click', ressetGame);
 newGameEl.addEventListener('click', newGame);
+soundEl.addEventListener('click', playMusic2);
 
 
 function nextMoveClick(evt){
+    playMusic("assets/sounds/exploding.wav");
     if(!areNotEnoughCards()) { 
         nextMoveEl.removeEventListener('click', nextMoveClick);
         flipUpCards(); 
@@ -56,11 +58,27 @@ function nextMoveClick(evt){
 
 }
 
+function playMusic2(sound){
+    playMusic("assets/sounds/Machine gun.wav")
+}
+
+function playMusic(sound){
+    player.src = sound;
+   player.currentTime = 0;
+   player.play(player.src);
+   setInterval(function(){
+       if(player.currentTime > 5){
+           player.pause();
+       }
+   })
+}
+
 function newGame(){
-   
-     if (isGameOver){
+    playMusic("assets/sounds/Machine gun.wav");
+    if (isGameOver){
         isGameOver = false;     
         homeDivEl.style.visibility = 'hidden';
+        // homeDivEl.setAttribute("id" ,"myelement")
         gameBoardEl.style.visibility = 'visible';
 
         let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
