@@ -16,28 +16,36 @@ h1 {
     margin: 0 30px 
 }
 
-
-.flex-ul {
-    /* position: fixed; */
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-  
-  }
-  
-  .flex-li {
-    padding: 5px;
-    /* width: 200px;
-    height: 100px; */
-    margin-top: 5px;
-    line-height: 10px;
+nav{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr; */
+    height: 7vh;
+    width: 55vh;
+    margin: 0 auto;
     color: white;
-    font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.5rem;
+}
+
+#newGame{
+    /* border-radius: 10px; */
+    /* background-color: white; */
+    /* color: rgb(230, 19, 19); */
+    grid-column: 1/2;
+    grid-row: 1/2;
+    /* align-self: center; */
     text-align: center;
-  }
+    /* margin-bottom: 15px; */
+}
+#resset{
+    grid-column: 2/3;
+    text-align: center;
+}
+#instructions{
+    grid-column: 3/4;
+    text-align: center;
+}
+
 
   #home{  
     position:absolute;
@@ -57,7 +65,7 @@ h1 {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     height: 55vh;
     width: 55vh;
-    margin: 15px auto;
+    margin: 10px auto;
 }
 .p2Cards{
     border-radius: 10px;
@@ -199,8 +207,8 @@ p{
 
 @media (min-width: 400px) {
     #homeImg{
-        height:300px;
-        width:300px;
+        height:200px;
+        width:200px;
     }
       }
 
