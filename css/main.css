@@ -12,7 +12,7 @@ body{
 h1 {
     color: white;
     font-size: 4rem;
-    margin: 15px 30px 
+    margin: 0 30px 
 }
 
 
@@ -44,84 +44,90 @@ h1 {
     left:40%;  
 }
 
+#left{
+    transform: scaleX(-1);
+}
+
 /* ******************************** */
 #gameBoard{
     visibility: hidden; 
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    height: 60vh;
-    width: 60vh;
-    margin: 20px auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 55vh;
+    width: 55vh;
+    margin: 15px auto;
+}
+.p2Cards{
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(230, 19, 19);
+    grid-column: 1/4;
+    grid-row: 1/2;
+    /* align-self: center; */
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 #playerTwo{
     grid-column: 1/4;
-    grid-row: 1/2;
+    grid-row: 2/3;
+    align-self: center;
 }
 #playerOne{
     grid-column: 1/4;
-    grid-row: 3/4;
-    /* justify-self: end; */
+    grid-row: 4/5;
+    align-self: center;
 }
 
 #warPlayerOne{
     grid-column: 1/2;
-    grid-row: 2/3;
+    grid-row: 3/4;
     margin: 0;
     justify-self: end; 
 }
 #warPlayerTwo{
     grid-column: 3/4;
-    grid-row: 2/3;
+    grid-row: 3/4;
     margin: 0;  
 }
+
 #nextMove{
     grid-column: 3/4;
-    grid-row: 3/4;
+    grid-row: 4/5;
     margin: 0; 
+    /* width: 12px;
+    height: 12px; */
+    justify-self: right;
+}
+.p1Cards{
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(54, 9, 218);
+    grid-column: 1/4;
+    grid-row: 5/6;
+    /* align-self: center; */
     text-align: center;
-    border: 4px solid white;
-    width: 12px;
-    height: 12px;
-    justify-items: center;
-  
+}
+
+#nextMoveImg{
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
 }
 
 #top{
-  
     display: flex; 
-    /* position: fixed; */
-    /* text-align: right;  */
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
-    
-    /* width: 500px;
-    height: 200px;
-    top: 22%;
-    left: 50%;
-    margin-top: -100px; //Negative half of height. */
-    /* margin-left: -250px; */
-
+    margin-top: 20px;
 }
 
-#left{
-    transform: scaleX(-1);
-}
 
-#imageDeck{
-    align-content: center;
-    height: 12rem; 
-    /* display: inline; */
-    /* background-color: white;
-    width: 4rem;
-    height: 3rem; */
-}
 
 .tableGame {
-    height: 7rem;
-    width: 5rem;
+    height: 6rem;
+    width: 4rem;
     background-color: white;
     margin: 0 auto;
     margin-bottom: 30px;
@@ -129,52 +135,17 @@ h1 {
 
 .card{ 
     background-color: white;
-    width: 5rem;
-    height: 3.4rem;   
-}
-
-
-
-#nextMoveImg{
-    /* justify-content: right;
-    justify-items: right;
-    align-content: center;
-    align-items: right; */
-    height: 4rem;
     width: 4rem;
+    height: 3.2rem;   
 }
 
-
-
-
-#warPlayerOne{
-    /* position:absolute;
-    top:61.2%;
-    left:37%; */
-    /* height:50%;
-    width:50%; */
-    
-}
-#warPlayerTwo{
-    /* position:absolute;
-    top:61.2%;
-    left:55.8%; */
-    /* height:50%;
-    width:50%; */
-    
-}
-
-#warCard{
-    /* height: 7rem;
-    width: 5rem; */
-    width: 7rem;
-    height: 5rem;
-}
 
 #homeImg{
     /* transform: rotate(25deg);   */
      animation: roll 3s infinite; 
     transform: rotate(20deg);
+    height:40%;
+    width:40%;
 }
 @keyframes roll {
     0% {
@@ -184,26 +155,58 @@ h1 {
       transform: rotate(360deg);
     }
   }
-#home img{
-    height:40%;
-    width:40%;
-   
-    
-}
 
-.cardBack, .warCard{
-    height: 7rem;
-    width: 5rem;
+
+.cardBack{
+    height: 6rem;
+    width: 4rem;
 
 }
 
 img {
     width: 7rem;
     height: 3.5rem;
+   
 
 }
 
 p{
-    color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    text-align: left;
+    font-weight: 900;
+   
+}
+
+/* eeeeeeeeeeeeeeeee */
+
+#warCard{
+    width: 7rem;
+    height: 5rem;
+
+}
+
+
+
+#imageDeck{
+    align-content: center; 
+    /* /* height: 12rem;  */
+
+}
+
+#warPlayerOne{
+    /* position:absolute; */
+    /* top:61.2%;
+    left:37%; 
+    height:50%;
+    width:50%; */
+  
+    
+}
+#warPlayerTwo{
+     /* position:absolute; */
+    /* top:61.2%;
+    left:55.8%; 
+     height:50%;
+    width:50%;  */
+    
 }

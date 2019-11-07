@@ -61,21 +61,24 @@ function nextMoveClick(evt){
 }
 
 function newGame(){
-    gameOver = false;
-    homeDivEl.style.visibility = 'hidden';
-    gameBoardEl.style.visibility = 'visible';
+   
+    // if (isGameOver){
+        gameOver = false;
+        homeDivEl.style.visibility = 'hidden';
+        gameBoardEl.style.visibility = 'visible';
 
-    let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
-    gameBoardEl.children[0].appendChild(card1)
+        let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
+        gameBoardEl.children[0].appendChild(card1)
 
-    let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
-    gameBoardEl.children[2].appendChild(card2)
-  
-    createDeck()
-    shufleCards()
-    shufleCards()
-    dealCards()
-    addScorePlayerLabel()
+        let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
+        gameBoardEl.children[2].appendChild(card2)
+    
+        createDeck()
+        shufleCards()
+        shufleCards()
+        dealCards()
+        addScorePlayerLabel()
+    //  }
 }
 
 function findWinner(){
@@ -84,16 +87,16 @@ function findWinner(){
         let valCard2 = player2.cards[player2.cards.length-startIdx].value;
 
         if(valCard1 === valCard2){
-            tempAlert("War!!!!!!!!", 4000)
+            tempAlert("War!!!!!!!! ", 4000)
             startIdx = (startIdx===1) ? startIdx = 4 : startIdx += 3
             isWar=true
             setTimeout(wait3s, 3000)
         }else{  
             if(valCard1 > valCard2){
-                tempAlert("Player One wins", 1300)
+                tempAlert("Player One wins ", 1300)
                 player1.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player1.cards))   
             }else if(valCard1 < valCard2){
-                tempAlert("Player two wins", 1300)
+                tempAlert("Player two wins ", 1300)
                 player2.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player2.cards))   
             }
             startIdx = 1;
@@ -122,12 +125,12 @@ function areNotEnoughCards(){
     isGameOver = false;
     if (isWar){
        if ((player1.cards.length < 4) || (player2.cards.length < 4)){
-        message =  (player1.cards.length > player2.cards.length) ? "Player1 Wins the Game": "Player2 Wins the Game"
+        message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player 2 Wins the Game"
         isGameOver = true;
         alert(message)
        }
     }else if ((player1.cards.length < 1) || (player2.cards.length < 1)){
-        message =  (player1.cards.length > player2.cards.length) ? "Player Wins the Game": "Player2 Wins the Game"
+        message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player2 Wins the Game"
         isGameOver = true;
         alert(message)
     } 
@@ -171,7 +174,7 @@ function addCardsToTheBoard(url, idTag,classTag){
 function tempAlert(msg,duration)
 {
     var el = document.createElement("div");
-    el.setAttribute("style","position:absolute;top:40%;left:55%;background-color:white;height:10%;width:30%;font-size:2.5rem;text-align:center;");
+    el.setAttribute("style","position:absolute;top:30%;left:55%;background-color:white;height:7%;width:30%;font-size:2rem;text-align:center;");
     el.innerHTML = msg;
     setTimeout(function(){
     el.parentNode.removeChild(el); 
@@ -180,7 +183,7 @@ function tempAlert(msg,duration)
     
 }
 
-function createDeck2() {
+function createDeck() {
     for (i= 2; i < 15; i++){
         let cardD = {},cardH = {},cardC = {},cardS = {};
 
@@ -199,9 +202,9 @@ function createDeck2() {
        arrayCards.push(cardD,cardH,cardC,cardS);
    }
 }
-function createDeck() {
-        let cardD2 = {},cardD3 = {}, cardD4 = {}, cardD5 = {}, cardD6 = {} 
-        let cardH2 = {}, cardH3 = {}, cardH4 = {}, cardH5 = {} ,cardH6 = {}
+function createDeck2() {
+        let cardD2 = {},cardD3 = {}, cardD4 = {}, cardD5 = {}, cardD6 = {},cardD7 = {} ,cardD8 = {}  
+        let cardH2 = {}, cardH3 = {}, cardH4 = {}, cardH5 = {} ,cardH6 = {}, cardH7 = {},cardH8 = {}
 
         cardD2.url = `assets/card-deck/diamonds/diamonds-2.svg`;
         cardD2.value = 2;  
@@ -212,7 +215,11 @@ function createDeck() {
         cardD5.url = `assets/card-deck/diamonds/diamonds-5.svg`;
         cardD5.value = 5; 
         cardD6.url = `assets/card-deck/diamonds/diamonds-6.svg`; 
-        cardD6.value = 6;            
+        cardD6.value = 6;  
+        cardD7.url = `assets/card-deck/diamonds/diamonds-7.svg`; 
+        cardD7.value = 7;  
+        cardD8.url = `assets/card-deck/diamonds/diamonds-8.svg`; 
+        cardD8.value = 8;          
         
        
         cardH2.url = `assets/card-deck/hearts/hearts-2.svg`;              
@@ -225,9 +232,14 @@ function createDeck() {
         cardH5.value = 5;
         cardH6.url = `assets/card-deck/hearts/hearts-6.svg`;              
         cardH6.value = 6;
+        cardH7.url = `assets/card-deck/hearts/hearts-7.svg`;              
+        cardH7.value = 7;
+        cardH8.url = `assets/card-deck/hearts/hearts-8.svg`;              
+        cardH8.value = 8;
+        
 
     
-       arrayCards.push(cardD2,cardD3,cardD4,cardD5,cardD6,cardH2,cardH3,cardH4,cardH5,cardH6);
+       arrayCards.push(cardD2,cardD3,cardD4,cardD5,cardD6,cardD7,cardD8,cardH2,cardH3,cardH4,cardH5,cardH6,cardH7,cardH8);
    
 }
 
