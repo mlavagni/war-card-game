@@ -13,9 +13,9 @@ Rules for two-player game:
 - Both players will flip one card, and the highest card wins the battle
 - If both cards have the same value, the war begins
     - Each player add three cards to the table and flip the last one
-    - The highest card wins all the cars 
+    - The highest card wins all the cards 
     - If there is a tie repeat the process
-- When any player at any time runs out of cards, you won the war
+- When any player at any time runs out of cards, you won the game
 
 # User Stories
 

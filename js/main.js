@@ -4,31 +4,25 @@ const player = new Audio();
 /*----- app's state (variables) -----*/
 let isGameOver = true;
 let isWar = false;
-let arrayCardsTable = [];
-let arrayCardsInGame = [];
-let cantPlayesr = 0;
-let startIdxWar = 1;
 let startIdx = 1;
-
+let countGames = 0;
+let explotionSound = "assets/sounds/exploding.wav";
+let gunsSound = "assets/sounds/Machine gun.wav";
+let victorySound ="assets/sounds/Cheering 3-SoundBible.com-1680253418.wav"
 let player1 = {
     num: 1,
-    // score: 0,
     cards: [],
-    // score: 0
 }
 
 let player2 = {
     num: 2,
-    // score: 0,
     cards: [],
-    // score: 0
 }
 
 /*----- cached element references -----*/
 const ressetEl = document.getElementById("resset");
 const newGameEl = document.getElementById("newGame");
 const batleCardsEl = document.getElementById("batleCards");
-const playerTwoEl = document.getElementById("playerTwo");
 const nextMoveEl = document.getElementById("nextMoveImg");
 const gameBoardEl = document.getElementById("gameBoard");
 const homeDivEl = document.getElementById("home");
@@ -41,11 +35,10 @@ const soundEl = document.getElementById("left");
 nextMoveEl.addEventListener('click', nextMoveClick);
 ressetEl.addEventListener('click', ressetGame);
 newGameEl.addEventListener('click', newGame);
-soundEl.addEventListener('click', playMusic2);
 
 
-function nextMoveClick(evt){
-    playMusic("assets/sounds/exploding.wav");
+function nextMoveClick(){
+    playMusic(explotionSound);
     if(!areNotEnoughCards()) { 
         nextMoveEl.removeEventListener('click', nextMoveClick);
         flipUpCards(); 
@@ -58,9 +51,9 @@ function nextMoveClick(evt){
 
 }
 
-function playMusic2(sound){
-    playMusic("assets/sounds/Machine gun.wav")
-}
+function ressetGame(){
+    location.reload(); 
+ }
 
 function playMusic(sound){
     player.src = sound;
@@ -74,25 +67,41 @@ function playMusic(sound){
 }
 
 function newGame(){
-    playMusic("assets/sounds/Machine gun.wav");
+    playMusic(gunsSound);
     if (isGameOver){
         isGameOver = false;     
         homeDivEl.style.visibility = 'hidden';
-        // homeDivEl.setAttribute("id" ,"myelement")
         gameBoardEl.style.visibility = 'visible';
-
-        let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
-        gameBoardEl.children[0].appendChild(card1)
-
-        let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
-        gameBoardEl.children[2].appendChild(card2)
-    
-        createDeck()
-        shufleCards()
-        shufleCards()
-        dealCards()
-        addScorePlayerLabel()
+        
+        
+         if (countGames < 1) {
+            addBackCards() 
+            createDeck();
+            shufleCards();
+            shufleCards();
+        }
+         ressetNewGame();
+        countGames++
+        shufleCards();
+        dealCards();
+        addScorePlayerLabel();
       }
+}
+function ressetNewGame(){
+    player1.cards = [];
+    player2.cards = [];
+    isGameOver = false;
+    isWar = false;
+    startIdx = 1;
+    deleteCards();   
+}
+
+function addBackCards(){
+    let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
+    gameBoardEl.children[0].appendChild(card1)
+
+    let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
+    gameBoardEl.children[2].appendChild(card2)
 }
 
 function findWinner(){
@@ -135,20 +144,22 @@ function wait3s(){
 }
 
 function areNotEnoughCards(){
-    let message
+    let message;
     isGameOver = false;
     if (isWar){
        if ((player1.cards.length < 4) || (player2.cards.length < 4)){
-        message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player 2 Wins the Game"
+        message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player 2 Wins the Game";
+        playMusic(victorySound);
         isGameOver = true;
-        alert(message)
+        alert(message);
        }
     }else if ((player1.cards.length < 1) || (player2.cards.length < 1)){
-        message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player2 Wins the Game"
+        message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player2 Wins the Game";
         isGameOver = true;
-        alert(message)
+        playMusic(victorySound);
+        alert(message);
     } 
-    return isGameOver
+    return isGameOver;
 }
 
 function deleteCards() {
@@ -239,8 +250,6 @@ function dealCards(){
     }
 }
 
-function ressetGame(){
-    location.reload(); 
- }
+
 
 
