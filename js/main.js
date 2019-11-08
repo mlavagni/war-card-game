@@ -73,20 +73,20 @@ function newGame(){
         homeDivEl.style.visibility = 'hidden';
         gameBoardEl.style.visibility = 'visible';
         
-        
-         if (countGames < 1) {
+        if (countGames < 1) {
             addBackCards() 
             createDeck();
             shufleCards();
             shufleCards();
         }
-         ressetNewGame();
+        ressetNewGame();
         countGames++
         shufleCards();
         dealCards();
         addScorePlayerLabel();
-      }
+    }
 }
+
 function ressetNewGame(){
     player1.cards = [];
     player2.cards = [];
@@ -115,6 +115,7 @@ function findWinner(){
             isWar=true
             setTimeout(wait3s, 3000)
         }else{  
+            if (areNotEnoughCards){
             if(valCard1 > valCard2){
                 tempAlert("Player One wins ", 1300)
                 player1.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player1.cards))   
@@ -126,6 +127,7 @@ function findWinner(){
             isWar = false;
             setTimeout(deleteCards, 1700) 
             areNotEnoughCards()
+            }
         }
     }
 }
@@ -157,7 +159,7 @@ function areNotEnoughCards(){
         message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player2 Wins the Game";
         isGameOver = true;
         playMusic(victorySound);
-        alert(message);
+        alert(message);  
     } 
     return isGameOver;
 }
@@ -228,6 +230,7 @@ function createDeck() {
        arrayCards.push(cardD,cardH,cardC,cardS);
    }
 }
+
 
 function shufleCards(){
     var i = 0, j = 0, temp = null
