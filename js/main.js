@@ -36,7 +36,7 @@ nextMoveEl.addEventListener('click', nextMoveClick);
 ressetEl.addEventListener('click', ressetGame);
 newGameEl.addEventListener('click', newGame);
 
-
+/*----- event functions -----*/
 function nextMoveClick(){
     playMusic(explotionSound);
     if(!areNotEnoughCards()) { 
@@ -115,7 +115,7 @@ function findWinner(){
             isWar=true
             setTimeout(wait3s, 3000)
         }else{  
-            if (areNotEnoughCards){
+            
             if(valCard1 > valCard2){
                 tempAlert("Player One wins ", 1300)
                 player1.cards = player1.cards.splice(player1.cards.length - startIdx).concat(player2.cards.splice(player2.cards.length - startIdx).concat(player1.cards))   
@@ -127,7 +127,7 @@ function findWinner(){
             isWar = false;
             setTimeout(deleteCards, 1700) 
             areNotEnoughCards()
-            }
+            
         }
     }
 }
@@ -148,6 +148,9 @@ function wait3s(){
 function areNotEnoughCards(){
     let message;
     isGameOver = false;
+    if ((player1.cards.length <= startIdx) && (player2.cards.length <= startIdx)){
+            alert("not enoght cards");
+        } else{
     if (isWar){
        if ((player1.cards.length < 4) || (player2.cards.length < 4)){
         message =  (player1.cards.length > player2.cards.length) ? "Player 1 Wins the Game": "Player 2 Wins the Game";
@@ -160,7 +163,8 @@ function areNotEnoughCards(){
         isGameOver = true;
         playMusic(victorySound);
         alert(message);  
-    } 
+    }
+}
     return isGameOver;
 }
 
@@ -212,7 +216,7 @@ function tempAlert(msg,duration)
 
 function createDeck() {
     "<15"
-    for (i= 2; i < 6; i++){
+    for (i= 2; i < 15; i++){
         let cardD = {},cardH = {},cardC = {},cardS = {};
 
         cardD.url = `assets/card-deck/diamonds/diamonds-${i}.svg`;              
