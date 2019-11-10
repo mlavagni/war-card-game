@@ -240,6 +240,17 @@ p{
       font-size: 1rem;
   }
 
+  #messageDiv{
+    position:absolute;
+    top:35%;
+    left:55%;
+    background-color:white;
+    height:7%;
+    width:30%;
+    font-size:2rem;
+    text-align:center;
+ } 
+
   @media only screen and (max-width: 460px){ 
     #home{  
         position:absolute;
@@ -248,15 +259,23 @@ p{
     }
     
     #homeImg{
-        height:60%;
-        width:60%;
+        height:58%;
+        width:58%;
         justify-content: center;
         margin: 0 auto;
         
     } 
     #messageDiv{
-        font-size: 3px;
+        position:absolute;
+        top:41%;
+        left:60%;
+        height:5%;
+        width:30%;
+        font-size: 0.8rem;
+        text-align:center;
      } 
+      
+        
 } 
 
 

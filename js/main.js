@@ -204,9 +204,9 @@ function addCardsToTheBoard(url, idTag,classTag){
 function tempAlert(msg,duration)
 {
     var el = document.createElement("div");
-    el.setAttribute("style","position:absolute;top:35%;left:55%;background-color:white;height:7%;width:30%;font-size:2rem;text-align:center;");
     el.setAttribute("id", "messageDiv");
-    el.innerHTML = msg;
+    // el.setAttribute("style","position:absolute;top:35%;left:55%;background-color:white;height:7%;width:30%;font-size:2rem;text-align:center;");
+    el.innerHTML = `<span id=tempMessage> ${msg} </span`;
     setTimeout(function(){
     el.parentNode.removeChild(el); 
     },duration);
