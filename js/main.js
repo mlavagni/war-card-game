@@ -38,7 +38,6 @@ newGameEl.addEventListener('click', newGame);
 
 /*----- event functions -----*/
 function nextMoveClick(){
-    playMusic(explotionSound);
     if(!areNotEnoughCards()) { 
         nextMoveEl.removeEventListener('click', nextMoveClick);
         flipUpCards(); 
@@ -96,20 +95,13 @@ function ressetNewGame(){
     deleteCards();   
 }
 
-function addBackCards(){
-    let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
-    gameBoardEl.children[0].appendChild(card1)
-
-    let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
-    gameBoardEl.children[2].appendChild(card2)
-}
-
 function findWinner(){
     if (!isGameOver){
         let valCard1 = player1.cards[player1.cards.length-startIdx].value;
         let valCard2 = player2.cards[player2.cards.length-startIdx].value;
 
         if(valCard1 === valCard2){
+            playMusic(explotionSound);
             tempAlert("War!!!!!!!! ", 4000)
             startIdx = (startIdx===1) ? startIdx = 4 : startIdx += 3
             isWar=true
@@ -181,41 +173,20 @@ function deleteCards() {
     nextMoveEl.addEventListener('click', nextMoveClick);
   }
 
-function flipUpCards(){
-    if (!areNotEnoughCards()){
-        if (!isWar){
-            batleCardsEl.appendChild(addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardP2", "card"));
-            batleCardsEl.appendChild(addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardP1", "card"));
-        } else{
-            gameBoardEl.children[3].appendChild((addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardWarP1", "card")));
-            gameBoardEl.children[4].appendChild((addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardWarP2", "card")));
-        }
-    }
-}
-
-function addCardsToTheBoard(url, idTag,classTag){
-    let imgEl = document.createElement('img');
-    imgEl.setAttribute("src", url);
-    imgEl.setAttribute("id", idTag);
-    imgEl.classList.add(classTag);
-    return imgEl
-}
 
 function tempAlert(msg,duration)
 {
     var el = document.createElement("div");
     el.setAttribute("id", "messageDiv");
-    // el.setAttribute("style","position:absolute;top:35%;left:55%;background-color:white;height:7%;width:30%;font-size:2rem;text-align:center;");
     el.innerHTML = `<span id=tempMessage> ${msg} </span`;
     setTimeout(function(){
     el.parentNode.removeChild(el); 
     },duration);
-    document.body.appendChild(el); 
-    
+    document.body.appendChild(el);   
 }
 
+//Create deck of cards (52 cards)
 function createDeck() {
-    "<15"
     for (i= 2; i < 15; i++){
         let cardD = {},cardH = {},cardC = {},cardS = {};
 
@@ -235,7 +206,7 @@ function createDeck() {
    }
 }
 
-
+//Shufle the cards
 function shufleCards(){
     var i = 0, j = 0, temp = null
     
@@ -246,7 +217,8 @@ function shufleCards(){
         arrayCards[j] = temp
     }
 }
-        
+ 
+//Deal the cards 26 cards to each player
 function dealCards(){  
     for ( i = 0; i < arrayCards.length; i++){
         if (i % 2 === 0){
@@ -257,6 +229,37 @@ function dealCards(){
     }
 }
 
+// Add the back side of the cards to the board
+function addBackCards(){
+    let card1  = addCardsToTheBoard("assets/card-deck/backs/blue.svg","backCardP1","cardBack")
+    gameBoardEl.children[0].appendChild(card1)
 
+    let card2  = addCardsToTheBoard("assets/card-deck/backs/red.svg","backCardP1","cardBack")
+    gameBoardEl.children[2].appendChild(card2)
+}
 
+//Add cards to the board, parameters 
+//url of the card
+//idTag = the id of the image
+//class tag = the class of the image
+function addCardsToTheBoard(url, idTag,classTag){
+    let imgEl = document.createElement('img');
+    imgEl.setAttribute("src", url);
+    imgEl.setAttribute("id", idTag);
+    imgEl.classList.add(classTag);
+    return imgEl
+}
+
+//Flip up each player cards up for regular game or war too
+function flipUpCards(){
+    if (!areNotEnoughCards()){
+        if (!isWar){
+            batleCardsEl.appendChild(addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardP2", "card"));
+            batleCardsEl.appendChild(addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardP1", "card"));
+        } else{
+            gameBoardEl.children[3].appendChild((addCardsToTheBoard(player1.cards[(player1.cards.length - startIdx)].url, "cardWarP1", "card")));
+            gameBoardEl.children[4].appendChild((addCardsToTheBoard(player2.cards[(player2.cards.length - startIdx)].url, "cardWarP2", "card")));
+        }
+    }
+}
 
